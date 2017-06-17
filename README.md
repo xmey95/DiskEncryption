@@ -24,7 +24,7 @@ A differenza della crittografia del disco, la crittografia a livello di file sys
 
 #### Disk encryption and Trusted Platform Module
 
-Il Trusted Platform Modul (TPM) è un criptoprocessore sicuro incorporato nella scheda madre che può essere utilizzato per l'autenticazione di un dispositivo hardware. Poiché ogni chip TPM è unico a un particolare dispositivo, è in grado di eseguire l'autenticazione delle piattaforme. Può essere utilizzato per verificare che il sistema che cerca l'accesso è il sistema previsto.
+Il Trusted Platform Module (TPM) è un criptoprocessore sicuro incorporato nella scheda madre che può essere utilizzato per l'autenticazione di un dispositivo hardware. Poiché ogni chip TPM è unico a un particolare dispositivo, è in grado di eseguire l'autenticazione delle piattaforme. Può essere utilizzato per verificare che il sistema che cerca l'accesso è il sistema previsto.
 Un numero limitato di soluzioni di crittografia disco supporta TPM. Queste implementazioni possono avvolgere la chiave di decodifica usando il TPM, quindi collegando l'unità disco rigido (HDD) a un particolare dispositivo. Se l'HDD viene rimosso da quel particolare dispositivo e posto in un altro, il processo di decrittografia non riesce. Il ripristino è possibile con la password di decrittografia o il token.
 Anche se questo ha il vantaggio che il disco non può essere rimosso dal dispositivo, potrebbe generare un singolo punto di errore nella crittografia. Ad esempio, se qualcosa accade al TPM o alla scheda madre, un utente non sarebbe in grado di accedere ai dati collegando l'unità disco a un altro computer, a meno che tale utente non disponga di una chiave di ripristino separata.
 
@@ -142,7 +142,7 @@ Per far accadere questo, alcune informazioni segrete (di solito sono keyfile e/o
 - Cifratura stacked filesystem
 
   Le soluzioni di crittografia stacked filesystem vengono implementate come un livello che pila sopra un file system esistente, causando che tutti i file scritti in una cartella abilitata per la crittografia siano crittografati on-the-fly prima che il file system sottostante li scriva su disco e decifrati ogni volta che il filesystem li legge dal disco. In questo modo, i file vengono memorizzati nel file system host in forma crittografata (il che significa che il loro contenuto, e di solito i nomi di file / cartelle, sono sostituiti da dati casuali di circa la stessa lunghezza), ma diversi da quelli che ancora esistono in quel filesystem.
-  Il modo in cui viene implementato è che per sbloccare la cartella che memorizza i file crittografati crudi nel filesystem host ("directory inferiore"), viene montato su di esso o in opzione una posizione diversa ("superiore Directory "), dove gli stessi file vengono visualizzati in forma leggibile, fino a quando non viene rimosso o il sistema è disattivato.
+  Il modo in cui viene implementato è che per sbloccare la cartella che memorizza i file crittografati crudi nel filesystem host ("directory inferiore"), viene montato su di esso o in opzione una posizione diversa ("directory superiore"), dove gli stessi file vengono visualizzati in forma leggibile, fino a quando non viene rimosso o il sistema è disattivato.
   Soluzioni disponibili in questa categoria sono eCryptfs e EncFS.
 
 - Cifratura Block device
