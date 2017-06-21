@@ -59,6 +59,10 @@
 
 10. #### Appendice A: Disk Encryption nei database
 
+  - 10.1 Transparent Database Encryption (TDE)
+
+  - 10.2 Encrypting File System (EFS)
+
 11. #### Fonti
 
 <br>
@@ -326,6 +330,14 @@ La demo comprende i due tools rappresentanti delle due categorie prima descritte
 
 ## 10. Appendice A: Disk Encryption nei database
 
+#### 10.1 Transparent Database Encryption (TDE)
+
+TDE garantisce che i dati sui supporti di memorizzazione fisici non possono essere letti da individui dannosi che possono intendersi rubarli. I dati che non possono essere letti sono inutili, riducendo così l'incentivo al furto. Forse la forza più importante attribuita a TDE è la sua trasparenza. Dato che TDE cifra tutti i dati si può dire che nessuna applicazione deve essere modificata in modo che TDE funzioni correttamente. È importante notare che TDE cifra l'intero database e il backup del database. L'elemento trasparente di TDE ha a che fare con il fatto che TDE cifra sul "livello di pagina", che significa essenzialmente che i dati vengono crittografati quando vengono memorizzati e decrittografati quando sono chiamati nella memoria del sistema. Il contenuto del database viene crittografato utilizzando una chiave simmetrica che viene spesso indicata come una "chiave di crittografia del database".
+
+#### 10.2 Encrypting File System (EFS)
+
+I database sono gestiti da "Database Management Systems" (DBMS) che funzionano in cima a un sistema operativo esistente (OS). Ciò solleva un potenziale problema di sicurezza, in quanto un database crittografato potrebbe essere in esecuzione su un sistema operativo accessibile e potenzialmente vulnerabile. EFS può crittografare i dati che non fanno parte di un sistema di database, il che implica che la portata della crittografia per EFS sia molto più ampia se confrontata ad un sistema come il TDE che è in grado di crittografare i file di database. Mentre EFS amplia la portata della crittografia, riduce anche le prestazioni del database e può causare problemi di amministrazione poiché gli amministratori di sistema richiedono l'accesso del sistema operativo all'uso di EFS. A causa delle problematiche relative alla prestazione, EFS non viene utilizzato tipicamente nel database di applicazioni che richiedono frequenti input e output di database. Per compensare i problemi di prestazioni è spesso consigliato che i sistemi EFS siano utilizzati in ambienti con pochi utenti.
+
 ## 11. Fonti
 
 #### Wikipedia
@@ -337,6 +349,8 @@ https://en.wikipedia.org/wiki/Disk_encryption_hardware
 https://en.wikipedia.org/wiki/Disk_encryption_software
 
 https://it.wikipedia.org/wiki/Negazione_plausibile
+
+https://en.wikipedia.org/wiki/Database_encryption
 
 #### ArchWiki
 
