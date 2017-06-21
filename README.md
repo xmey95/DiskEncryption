@@ -76,27 +76,27 @@ L'espressione Full Disk Encryption o Whole Disk Encryption indica un disco critt
 Rispetto ai controlli di accesso generalmente attuati da un sistema operativo (OS), la crittografia protegge passivamente la riservatezza dei dati anche quando il sistema operativo non è attivo, ad esempio se i dati vengono letti direttamente dall'hardware o da un altro sistema operativo. Inoltre, il cripto-shredding elimina la necessità di cancellare i dati alla fine del ciclo di vita del disco.
 I dati del disco vengono protetti mediante crittografia simmetrica con la chiave generata casualmente quando viene creata la crittografia di un disco. Questa chiave è in qualche modo crittografata usando una password o una frase di passaggio noti (idealmente) solo per l'utente. Successivamente, per accedere ai dati del disco, l'utente deve fornire la password per rendere la chiave disponibile al software. Ciò deve essere fatto dopo ogni avvio del sistema operativo prima che i dati crittografati possano essere utilizzati.
 
-#### 1.1 Transparent Encryption
+#### 1.1 Transparent Encryption<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#Transparent_encryption">Wikipedia</a></sup>
 
 La Transparent Encryption, nota anche come crittografia in tempo reale o crittografia on-the-fly (OTFE), è un metodo utilizzato da alcuni software di crittografia del disco. "Trasparente" si riferisce al fatto che i dati vengono crittografati o decriptati automaticamente nel momento in cui vengono caricati o salvati.
 Con la transparent Encryption i dati diventano accessibili nel momento in cui viene fornita la chiave, e a quel punto il volume viene montato come se fosse un'unità fisica, rendendo i file accessibili come quelli non crittografati.
 L'intero sistema di file all'interno del volume viene crittografato (inclusi i nomi di file, i nomi delle cartelle, il contenuto dei file e altri meta-dati).
 In generale, ogni metodo in cui i dati vengono trasparentemente crittografati sulla scrittura e decrittografati sulla lettura può essere chiamato transparent encryption.
 
-#### 1.2 Disk encryption vs. filesystem-level encryption
+#### 1.2 Disk encryption vs. filesystem-level encryption<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#Disk_encryption_vs._filesystem-level_encryption">Wikipedia</a></sup>
 
 La crittografia del disco non sostituisce la crittografia dei file in tutte le situazioni. La crittografia del disco viene talvolta utilizzata in combinazione con la crittografia a livello di filesystem con l'intento di fornire un'implementazione più sicura. Poiché la crittografia del disco utilizza generalmente la stessa chiave per crittografare l'intero volume, tutti i dati possono essere decriptabili quando il sistema viene eseguito. Tuttavia, alcune soluzioni di crittografia disco utilizzano più chiavi per crittografare diverse partizioni. Se un attaccante ha accesso al computer in fase di esecuzione, l'attaccante ha accesso a tutti i file. La codifica convenzionale di file e cartelle comprende invece diverse chiavi per diverse porzioni del disco. Pertanto, un utente malintenzionato non può estrarre informazioni da file e cartelle ancora cifrati.
 A differenza della crittografia del disco, la crittografia a livello di file system non codifica tipicamente i metadati del filesystem, ad esempio la struttura della directory, i nomi dei file, i timestamp o le dimensioni dei moduli.
 
-#### 1.3 Disk encryption and Trusted Platform Module
+#### 1.3 Disk encryption and Trusted Platform Module<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#Disk_encryption_and_Trusted_Platform_Module">Wikipedia</a></sup>
 
 Il Trusted Platform Module (TPM) è un criptoprocessore sicuro incorporato nella scheda madre che può essere utilizzato per l'autenticazione di un dispositivo hardware. Poiché ogni chip TPM è unico a un particolare dispositivo, è in grado di eseguire l'autenticazione delle piattaforme. Può essere utilizzato per verificare che il sistema che cerca l'accesso è il sistema previsto.
 Un numero limitato di soluzioni di crittografia disco supporta TPM. Queste implementazioni possono avvolgere la chiave di decodifica usando il TPM, quindi collegando l'unità disco rigido (HDD) a un particolare dispositivo. Se l'HDD viene rimosso da quel particolare dispositivo e posto in un altro, il processo di decrittografia non riesce. Il ripristino è possibile con la password di decrittografia o il token.
 Anche se questo ha il vantaggio che il disco non può essere rimosso dal dispositivo, potrebbe generare un singolo punto di errore nella crittografia. Ad esempio, se qualcosa accade al TPM o alla scheda madre, un utente non sarebbe in grado di accedere ai dati collegando l'unità disco a un altro computer, a meno che tale utente non disponga di una chiave di ripristino separata.
 
-## 2. Full disk encryption
+## 2. Full disk encryption<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#Full_disk_encryption">Wikipedia</a></sup>
 
-#### 2.1 Benefici
+#### 2.1 Benefici<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#Benefits">Wikipedia</a></sup>
 
 La Full Disk Encryption ha diversi vantaggi rispetto alla File Encryption regolare, o celle crittografate. Di seguito sono elencati alcuni vantaggi della crittografia del disco:
 
@@ -106,7 +106,7 @@ La Full Disk Encryption ha diversi vantaggi rispetto alla File Encryption regola
 
 - La distruzione immediata dei dati, come la distruzione delle chiavi crittografiche (crypto-shredding), rende inutili i dati contenuti. Tuttavia, se la sicurezza verso i futuri attacchi è una preoccupazione, si consiglia l'eliminazione o la distruzione fisica.
 
-#### 2.2 Il problema della chiave al boot
+#### 2.2 Il problema della chiave al boot<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption#The_boot_key_problem">Wikipedia</a></sup>
 
 Un problema da affrontare nella Full Disk Encryption è che i blocchi in cui è memorizzato il sistema operativo devono essere decifrati prima che il sistema operativo possa avviarsi, il che significa che la chiave deve essere disponibile prima che esista un'interfaccia utente per richiedere una password. La maggior parte delle soluzioni di crittografia completa utilizza l'autenticazione Pre-Boot caricando un sistema operativo piccolo e altamente sicuro che è strettamente bloccato e disegnato rispetto alle variabili di sistema per verificare l'integrità del kernel Pre-Boot. Alcune implementazioni possono utilizzare hardware come un modulo di piattaforma attendibile per garantire l'integrità dell'ambiente di avvio e pertanto frustrare gli attacchi che mirano al loader di avvio sostituendolo con una versione modificata. Ciò garantisce che l'autenticazione può avvenire in un ambiente controllato senza la possibilità che un bootkit venga utilizzato per sovvertire la decrittografia pre-avvio.
 
@@ -120,13 +120,13 @@ Ci sono diversi strumenti disponibili sul mercato che consentono la crittografia
 
 La Full Disk Encryption Hardware all'interno del dispositivo di memorizzazione è chiamata unità autocripting e non ha alcun impatto sulle prestazioni. Inoltre, la chiave di crittografia dei media non lascia mai il dispositivo stesso e pertanto non è disponibile per alcun virus nel sistema operativo.
 
-#### 3.1 Disk Encryption Hardware
+#### 3.1 Disk Encryption Hardware<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption_hardtware">Wikipedia</a></sup>
 
 Rispetto alle restrizioni di accesso comunemente attuate da un sistema operativo, questa tecnica protegge i dati anche quando il sistema operativo non è attivo, ad esempio, se i dati vengono letti direttamente dall'hardware.
 L'hardware progettato per uno scopo particolare può spesso ottenere prestazioni migliori rispetto alle implementazioni del software e Disk Encryption Hardware può essere resa più trasparente del software rispetto alla Disk Encryption Software. Non appena la chiave è stata inizializzata, l'hardware dovrebbe in linea di principio essere completamente trasparente per il sistema operativo e quindi lavorare con qualsiasi sistema operativo.
 Anche le soluzioni hardware sono state criticate per essere poco documentate. Molti aspetti di come viene eseguita la crittografia non sono pubblicati dal fornitore. Questo lascia all'utente poca possibilità di giudicare la sicurezza del prodotto e dei metodi di attacco potenziali. Inoltre aumenta il rischio di blocco del fornitore.
 
-##### Self-Encrypted Drives
+##### Self-Encrypted Drives<sup><a href="https://wiki.archlinux.org/index.php/Self-Encrypting_Drives">ArchWiki</a></sup>
 
 Molti moderni SED FDE sono prodotti da fornitori HDD / SSD che aderiscono agli standard OPAL 2.0 e Enterprise sviluppati dal gruppo Trusted Computing (TCG). Le versioni Enterprise SAS dello standard TCG sono chiamate unità "TCG Enterprise". L'hardware prodotto secondo gli standard è etichettato di conseguenza.
 Lo sblocco (per la decodifica di runtime) dell'unità avviene tramite un software, l'ambiente di autenticazione pre-avvio o con una password ATA basata su BIOS in fase di accensione. La gestione delle chiavi avviene all'interno del controller di disco e le chiavi di crittografia sono di solito 128 o 256 bit Advanced Encryption Standard (AES).
@@ -168,13 +168,13 @@ SVANTAGGI
 
     Il firmware dell'unità può essere compromesso (backdoor). Tuttavia, se i dati vengono crittografati dal sistema operativo (ad esempio, dm-crypt), la chiave di crittografia non è conosciuta per l'unità compromessa, evitando così completamente questo vettore d'attacco.
 
-#### 3.2 Disk Encryption Software
+#### 3.2 Disk Encryption Software<sup><a href="https://en.wikipedia.org/wiki/Disk_encryption_software">Wikipedia</a></sup>
 
 La Disk Encryption Software funziona in genere a livello tra tutte le applicazioni e la maggior parte dei programmi di sistema e dei driver "in modo trasparente" (da un punto di vista dell'utente) che crittografa i dati dopo che vengono prodotti da un programma ma prima che siano fisicamente scritti sul disco. Al contrario, decrittografa i dati immediatamente dopo la lettura, ma prima di essere presentati ad un programma. Fatto bene, i programmi non sono consapevoli di queste operazioni crittografiche.
 
 ##### Features
 
-PLAUSIBLE DENIABILITY
+PLAUSIBLE DENIABILITY<sup><a href="https://it.wikipedia.org/wiki/Negazione_plausibile">Wikipedia</a></sup>
 
 Alcuni sistemi di crittografia a disco, come VeraCrypt offrono livelli di plausible deniability, che potrebbero essere utili qualora ad un utente gli venga estorta la password di un archivio cifrato, di negare l'esistenza dell'archivio stesso.
 
@@ -205,13 +205,13 @@ Tutti i sistemi di crittografia basati su software sono vulnerabili a vari attac
 Tutti i metodi di cifratura operano in modo tale che anche se il disco contiene effettivamente dati crittografati, il sistema operativo e le applicazioni vedono essi come i corrispondenti dati normali leggibili finché il contenitore crittografico (ossia la parte logica del disco che contiene i dati crittografati) è "sbloccato" e montato.
 Per far accadere questo, alcune informazioni segrete (di solito sono keyfile e/o password) devono essere fornite dall'utente, dal quale la reale chiave di cifratura può essere derivata (e immagazzinata nel portachiavi del kernel per la durata della sessione).
 
-- Cifratura stacked filesystem
+- Cifratura stacked filesystem<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Stacked_filesystem_encryption">ArchWiki</a></sup>
 
   Le soluzioni di crittografia stacked filesystem vengono implementate come un livello che pila sopra un file system esistente, causando che tutti i file scritti in una cartella abilitata per la crittografia siano crittografati on-the-fly prima che il file system sottostante li scriva su disco e decifrati ogni volta che il filesystem li legge dal disco. In questo modo, i file vengono memorizzati nel file system host in forma crittografata (il che significa che il loro contenuto, e di solito i nomi di file / cartelle, sono sostituiti da dati casuali di circa la stessa lunghezza), ma diversi da quelli che ancora esistono in quel filesystem.
   Il modo in cui viene implementato è che per sbloccare la cartella che memorizza i file crittografati crudi nel filesystem host ("directory inferiore"), viene montato su di esso o in opzione una posizione diversa ("directory superiore"), dove gli stessi file vengono visualizzati in forma leggibile, fino a quando non viene rimosso o il sistema è disattivato.
   Soluzioni disponibili in questa categoria sono eCryptfs e EncFS.
 
-- Cifratura Block device
+- Cifratura Block device<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Block_device_encryption">ArchWiki</a></sup>
 
   I metodi di cifratura dei dispositivi a blocchi, d'altronde, operano sotto lo strato del filesystem e assicurano che tutto sia scritto in un dispositivo a blocchi (ossia un disco intero, o una partizione, o un file che si comporta come un dispositivo virtuale loop-back) cifrato. Ciò significa che mentre il dispositivo a blocchi è spento, il suo intero contenuto assomiglia a una grande macchia di dati casuali, senza la possibilità di determinare che tipo di filesystem sia e quali dati contenga. Si può accedere ai dati, montando il contenitore protetto (in questo caso un dispositivo a blocchi) in una posizione arbitraria in un modo speciale.
   Soluzioni disponibili in questa categoria sono loop-AES, dm-crypt + LUKS e TrueCrypt.
@@ -220,13 +220,13 @@ Per far accadere questo, alcune informazioni segrete (di solito sono keyfile e/o
 
 I vari tool di cifratura software presentano varie differenze tra di loro, molte delle quali sono caratterizzanti della categoria di cui fanno parte.
 
-#### 6.1 Cifratura stacked filesystem
+#### 6.1 Cifratura stacked filesystem<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Stacked_filesystem_encryption">ArchWiki</a></sup>
 
 Questi tipi di tool cifrano file. Il contenitore per i dati cifrati può essere una cartella in un filesystem esistente. Aggiungono uno strato aggiuntivo nel filesystem esistente, per cifrare/decifrare automaticamente i file quando sono scritti/letti. Possono essere usati senza pre-allocare una quantità fissa di spazio per il contenitore di dati cifrati e per proteggere filesystem esistenti senza l'accesso ai dispositivi a blocchi, es. filesystem NFS e Samba, cloud, etc. Inoltre permettono backup dei file cifrati offline.
 
 I principali tool di questa categoria sono:
 
-- eCryptfs
+- eCryptfs<sup><a href="https://wiki.archlinux.org/index.php/ECryptfs">ArchWiki</a></sup>
 
   Leggermente più veloce rispetto a EncFS; cifra file singoli portabili tra i sistemi. Supporta le cifrature AES, blowfish e twofish, il supporto per il salting e per la cifratura con accelerazione hardware.
 
@@ -234,7 +234,7 @@ I principali tool di questa categoria sono:
 
   Il più facile da usare; supporta le cifrature AES e Twofish. Permette il montaggio automatico dei filesystem al login e lo smontaggio automatico dei filesystem in caso di inattività. Inoltre utenti non-root posso creare/eliminare contenitori per dati cifrati.
 
-#### 6.2 Cifratura Block device
+#### 6.2 Cifratura Block device<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Block_device_encryption">ArchWiki</a></sup>
 
 Questi tipi di tool riescono a criptare interi dispositivi a blocchi. Il contenitore per i dati cifrati può essere un disco o una partizione / un file che si comporta come una partizione virtuale. Operano sotto lo strato del filesystem, non importa se il contenuto del dispositivo a blocchi cifrato è un filesystem, un partition table, un LVM setup, o altro. Inoltre questi tools cifrano anche i metadati e possono essere utilizzati per criptare interi dischi rigidi e addirittura le partizioni di swap.
 I principali tool di questa categoria sono:
@@ -243,7 +243,7 @@ I principali tool di questa categoria sono:
 
   Il meno recente; probabilmente il più veloce; funziona sui sistemi legacy. Supporta la cifratura AES e fornisce una protezione contro la forzatura delle chiavi.
 
-- dm-crypt + LUKS
+- dm-crypt + LUKS<sup><a href="https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS">ArchWiki</a></sup>
 
   Lo standard di fatto per la cifratura dei dispositivi a blocchi su Linux; molto flessibile. Probabilmente il più interessante tra tutti i tool di questa categoria. Supporta le cifrature AES, Twofish e Serpent e fornisce supporto per salting e per chiavi multiple utilizzate sugli stessi utenti. Inoltre fornisce supporto per il ridimensionamento manuale del dispositivo a blocchi cifrato. Utilizzando LUKS, l'utente può avere effettivamente fino a 8 file / passphrase diversi per decrittografare la chiave di crittografia, che a sua volta decrittografa i dati sottostanti. Questo approccio consente all'utente di revocare / modificare questi file chiave / passphrases come richiesto senza dover riciclare i dati, in quanto la chiave di crittografia di secondo livello è invariata (che viene re-crittografata dalla nuova passphrase).
 
@@ -288,7 +288,7 @@ Scegliere quale setup di Disk Encryption è appropriato per i propri scopi varia
 
 ## 8. Come funziona la Disk Encryption
 
-Per i fini della crittografia del disco, ogni dispositivo a blocchi (o file nel caso di crittografia di stacked filesystem) è diviso in settori di uguale lunghezza, per esempio 512 byte (4096 bit). La cifratura/decifratura avviene per ogni singolo settore, quindi il settore "n" del dispositivo a blocchi/file immagazzinerà la versione cifrata del settore "n" dei dati originali.
+Per i fini della crittografia del disco<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Basic_principle">ArchWiki</a></sup>, ogni dispositivo a blocchi (o file nel caso di crittografia di stacked filesystem) è diviso in settori di uguale lunghezza, per esempio 512 byte (4096 bit). La cifratura/decifratura avviene per ogni singolo settore, quindi il settore "n" del dispositivo a blocchi/file immagazzinerà la versione cifrata del settore "n" dei dati originali.
 Ogni volta che il sistema operativo o l'applicazione richiede un certo frammento di dato dal dispositivo a blocchi/file, l'intero settore/i che contiene i dati sarà letto dal disco, decifrato al volo, e temporaneamente immagazzinato nella memoria:
 
 <img src="schema1.png">
@@ -299,7 +299,7 @@ La crittografia disco utilizza "cipher di blocco", che operano su blocchi di dat
 La crittografia / decrittografia di un settore è ottenuta dividendolo in piccoli blocchi corrispondenti alla Block-size del cipher e seguendo un determinato set di regole (un cosiddetto "modo operativo") per applicare consecutivamente in cipher ai singoli blocchi.
 Semplicemente applicandolo ad ogni blocco separatamente senza modifiche (soprannominato "electronic codekbook (ECB mode)") non sarebbe sicuro, perché se gli stessi 16 byte di testo in chiaro producono sempre gli stessi 16 byte di ciphertext, un attaccante potrebbe facilmente riconoscere i pattern dal testo cifrato memorizzato sul disco.
 
-il modo operativo più semplice (e comune) utilizzato è il "cipher-block chaining (CBC)". Durante la crittografia di un settore con questa modalità, ogni blocco di dati di testo in chiaro viene combinato in modo matematico con il cyphertext del blocco precedente, prima di crittarlo utilizzando il cipher. Per il primo blocco, poiché non dispone di precedenti cyphertext da utilizzare, viene utilizzato un particolare blocco di dati pre-generato memorizzato con i metadati crittografici del settore e chiamato "vettore di inizializzazione (IV)":
+il modo operativo più semplice (e comune) utilizzato è il "cipher-block chaining<sup><a href="https://wiki.archlinux.org/index.php/Disk_encryption#Ciphers_and_modes_of_operation">ArchWiki</a></sup> (CBC)". Durante la crittografia di un settore con questa modalità, ogni blocco di dati di testo in chiaro viene combinato in modo matematico con il cyphertext del blocco precedente, prima di crittarlo utilizzando il cipher. Per il primo blocco, poiché non dispone di precedenti cyphertext da utilizzare, viene utilizzato un particolare blocco di dati pre-generato memorizzato con i metadati crittografici del settore e chiamato "vettore di inizializzazione (IV)":
 
 <img src="schema2.png">
 
@@ -318,7 +318,7 @@ La demo comprende i due tools rappresentanti delle due categorie prima descritte
 
 - dm-crypt + LUKS per i dispositivi a blocchi
 
-  Questo tool è stato utilizzato per effettuare una Non-Root Disk Encryption su una chiavetta USB e una Full Disk Encryption su una VM con Antergos.
+  Questo tool è stato utilizzato per effettuare una Non-Root Disk Encryption su una chiavetta USB<sup><a href="https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system">ArchWiki</a></sup> e una Full Disk Encryption su una VM con Antergos.
 
 - ECryptfs per lo stacked filesystem
 
@@ -328,7 +328,7 @@ La demo comprende i due tools rappresentanti delle due categorie prima descritte
 
   Questo tool è stato utilizzato per cifrare un disco su Windows e mostrare la feature di Hidden Volumes che ci offre questo tool
 
-## 10. Appendice A: Disk Encryption nei database
+## 10. Appendice A: Disk Encryption nei database<sup><a href="https://en.wikipedia.org/wiki/Database_encryption">Wikipedia</a></sup>
 
 #### 10.1 Transparent Database Encryption (TDE)
 
