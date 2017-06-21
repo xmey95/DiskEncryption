@@ -3,6 +3,59 @@
 
 <img src="logo.png" width="200">
 
+- #### Introduzione
+
+  - Introduzione
+
+  - Transparent Encryption
+
+  - Disk encryption vs. filesystem-level encryption
+
+  - Disk encryption and Trusted Platform Module
+
+- #### Full Disk Encryption
+
+  - Benefici
+
+  - Il problema della chiave al Boot
+
+- #### Vari strumenti di Disk Encryption
+
+  - Disk Encryption hardware
+
+  - Disk Encryption Software
+
+- #### Problemi di sicurezza
+
+- #### Metodi
+
+- #### Comparazione dei software di Disk Encryption
+
+  - Cifratura stacked filesystem
+
+    - eCryptfs
+
+    - EncFs
+
+  - Cifratura Block device
+
+    - loop-AES
+
+    - dm-crypt + LUKS
+
+    - TrueCrypt
+
+- #### Cosa scegliere?
+
+- #### Come funziona la Disk Encryption
+
+- #### Demo
+
+- #### Appendice A: Disk Encryption nei database
+
+- #### Fonti
+
+
 ## Introduzione
 
 La crittografia del disco è una tecnologia che protegge le informazioni convertendole in codice illeggibile che non può essere facilmente decifrato da persone non autorizzate. La crittografia del disco utilizza un software di crittografia disco o hardware per crittografare ogni bit di dati che va su un disco o sul volume di un disco. La crittografia del disco impedisce l'accesso non autorizzato all'archiviazione dei dati.
@@ -185,6 +238,8 @@ I principali tool di questa categoria sono:
 
   Molto portabile e e ben mantenuto. Molto simile a dm-crypt ma punta molto sulle performance, fornendo supporto per il multithreading e per la cifratura con accelerazione hardware.
 
+<img src="Diagram.png">
+
 ## Cosa scegliere?
 
 Scegliere quale setup di Disk Encryption è appropriato per i propri scopi varia in base ai vari obiettivi che si vogliono raggiungere. Per arrivare ad un setup che riesca a soddisfare le nostre esigenze bisogna rispondere a determinate domande:
@@ -257,6 +312,8 @@ La demo comprende i due tools rappresentanti delle due categorie prima descritte
 - VeraCrypt (Fork di TrueCrypt)
 
   Questo tool è stato utilizzato per cifrare un disco su Windows e mostrare la feature di Hidden Volumes che ci offre questo tool
+
+## Appendice A: Disk Encryption nei database
 
 ## Fonti
 
