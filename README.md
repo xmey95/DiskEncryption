@@ -237,8 +237,10 @@ I principali tool di questa categoria sono:
 - TrueCrypt
 
   Molto portabile e e ben mantenuto. Molto simile a dm-crypt ma punta molto sulle performance, fornendo supporto per il multithreading e per la cifratura con accelerazione hardware.
-
+  
+<div align="center">
 <img src="Diagram.png">
+</div>
 
 ## Cosa scegliere?
 
