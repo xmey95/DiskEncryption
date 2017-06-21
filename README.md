@@ -11,25 +11,25 @@
 
 1. #### Introduzione
 
-  1.1 Introduzione
+  - 1.1 Introduzione
 
-  1.2 Transparent Encryption
+  - 1.2 Transparent Encryption
 
-  1.3 Disk encryption vs. filesystem-level encryption
+  - 1.3 Disk encryption vs. filesystem-level encryption
 
-  1.4 Disk encryption and Trusted Platform Module
+  - 1.4 Disk encryption and Trusted Platform Module
 
 2. #### Full Disk Encryption
 
-  2.1 Benefici
+  - 2.1 Benefici
 
-  2.2 Il problema della chiave al Boot
+  - 2.2 Il problema della chiave al Boot
 
 3. #### Vari strumenti di Disk Encryption
 
-  3.1 Disk Encryption hardware
+  - 3.1 Disk Encryption hardware
 
-  3.2 Disk Encryption Software
+  - 3.2 Disk Encryption Software
 
 4. #### Problemi di sicurezza
 
@@ -37,13 +37,13 @@
 
 6. #### Comparazione dei software di Disk Encryption
 
-  6.1 Cifratura stacked filesystem
+  - 6.1 Cifratura stacked filesystem
 
     - eCryptfs
 
     - EncFs
 
-  6.2 Cifratura Block device
+  - 6.2 Cifratura Block device
 
     - loop-AES
 
