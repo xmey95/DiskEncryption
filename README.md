@@ -3,41 +3,47 @@
 
 <img src="logo.png" width="200">
 
-- #### Introduzione
+<br>
 
-  - Introduzione
+<br>
 
-  - Transparent Encryption
+<br>
 
-  - Disk encryption vs. filesystem-level encryption
+1. #### Introduzione
 
-  - Disk encryption and Trusted Platform Module
+  1.1 Introduzione
 
-- #### Full Disk Encryption
+  1.2 Transparent Encryption
 
-  - Benefici
+  1.3 Disk encryption vs. filesystem-level encryption
 
-  - Il problema della chiave al Boot
+  1.4 Disk encryption and Trusted Platform Module
 
-- #### Vari strumenti di Disk Encryption
+2. #### Full Disk Encryption
 
-  - Disk Encryption hardware
+  2.1 Benefici
 
-  - Disk Encryption Software
+  2.2 Il problema della chiave al Boot
 
-- #### Problemi di sicurezza
+3. #### Vari strumenti di Disk Encryption
 
-- #### Metodi
+  3.1 Disk Encryption hardware
 
-- #### Comparazione dei software di Disk Encryption
+  3.2 Disk Encryption Software
 
-  - Cifratura stacked filesystem
+4. #### Problemi di sicurezza
+
+5. #### Metodi
+
+6. #### Comparazione dei software di Disk Encryption
+
+  6.1 Cifratura stacked filesystem
 
     - eCryptfs
 
     - EncFs
 
-  - Cifratura Block device
+  6.2 Cifratura Block device
 
     - loop-AES
 
@@ -45,45 +51,45 @@
 
     - TrueCrypt
 
-- #### Cosa scegliere?
+7. #### Cosa scegliere?
 
-- #### Come funziona la Disk Encryption
+8. #### Come funziona la Disk Encryption
 
-- #### Demo
+9. #### Demo
 
-- #### Appendice A: Disk Encryption nei database
+10. #### Appendice A: Disk Encryption nei database
 
-- #### Fonti
+11. #### Fonti
 
 
-## Introduzione
+## 1. Introduzione
 
 La crittografia del disco è una tecnologia che protegge le informazioni convertendole in codice illeggibile che non può essere facilmente decifrato da persone non autorizzate. La crittografia del disco utilizza un software di crittografia disco o hardware per crittografare ogni bit di dati che va su un disco o sul volume di un disco. La crittografia del disco impedisce l'accesso non autorizzato all'archiviazione dei dati.
 L'espressione Full Disk Encryption o Whole Disk Encryption indica un disco crittografato completamente ad eccezione della partizione di avvio del sistema operativo. ALcuni potenti strumenti di crittografia a livello hardware possono crittografare l'intero disco, compresa la partizione di avvio del sistema operativo.
 Rispetto ai controlli di accesso generalmente attuati da un sistema operativo (OS), la crittografia protegge passivamente la riservatezza dei dati anche quando il sistema operativo non è attivo, ad esempio se i dati vengono letti direttamente dall'hardware o da un altro sistema operativo. Inoltre, il cripto-shredding elimina la necessità di cancellare i dati alla fine del ciclo di vita del disco.
 I dati del disco vengono protetti mediante crittografia simmetrica con la chiave generata casualmente quando viene creata la crittografia di un disco. Questa chiave è in qualche modo crittografata usando una password o una frase di passaggio noti (idealmente) solo per l'utente. Successivamente, per accedere ai dati del disco, l'utente deve fornire la password per rendere la chiave disponibile al software. Ciò deve essere fatto dopo ogni avvio del sistema operativo prima che i dati crittografati possano essere utilizzati.
 
-#### Transparent Encryption
+#### 1.1 Transparent Encryption
 
 La Transparent Encryption, nota anche come crittografia in tempo reale o crittografia on-the-fly (OTFE), è un metodo utilizzato da alcuni software di crittografia del disco. "Trasparente" si riferisce al fatto che i dati vengono crittografati o decriptati automaticamente nel momento in cui vengono caricati o salvati.
 Con la transparent Encryption i dati diventano accessibili nel momento in cui viene fornita la chiave, e a quel punto il volume viene montato come se fosse un'unità fisica, rendendo i file accessibili come quelli non crittografati.
 L'intero sistema di file all'interno del volume viene crittografato (inclusi i nomi di file, i nomi delle cartelle, il contenuto dei file e altri meta-dati).
 In generale, ogni metodo in cui i dati vengono trasparentemente crittografati sulla scrittura e decrittografati sulla lettura può essere chiamato transparent encryption.
 
-#### Disk encryption vs. filesystem-level encryption
+#### 1.2 Disk encryption vs. filesystem-level encryption
 
 La crittografia del disco non sostituisce la crittografia dei file in tutte le situazioni. La crittografia del disco viene talvolta utilizzata in combinazione con la crittografia a livello di filesystem con l'intento di fornire un'implementazione più sicura. Poiché la crittografia del disco utilizza generalmente la stessa chiave per crittografare l'intero volume, tutti i dati possono essere decriptabili quando il sistema viene eseguito. Tuttavia, alcune soluzioni di crittografia disco utilizzano più chiavi per crittografare diverse partizioni. Se un attaccante ha accesso al computer in fase di esecuzione, l'attaccante ha accesso a tutti i file. La codifica convenzionale di file e cartelle comprende invece diverse chiavi per diverse porzioni del disco. Pertanto, un utente malintenzionato non può estrarre informazioni da file e cartelle ancora cifrati.
 A differenza della crittografia del disco, la crittografia a livello di file system non codifica tipicamente i metadati del filesystem, ad esempio la struttura della directory, i nomi dei file, i timestamp o le dimensioni dei moduli.
 
-#### Disk encryption and Trusted Platform Module
+#### 1.3 Disk encryption and Trusted Platform Module
 
 Il Trusted Platform Module (TPM) è un criptoprocessore sicuro incorporato nella scheda madre che può essere utilizzato per l'autenticazione di un dispositivo hardware. Poiché ogni chip TPM è unico a un particolare dispositivo, è in grado di eseguire l'autenticazione delle piattaforme. Può essere utilizzato per verificare che il sistema che cerca l'accesso è il sistema previsto.
 Un numero limitato di soluzioni di crittografia disco supporta TPM. Queste implementazioni possono avvolgere la chiave di decodifica usando il TPM, quindi collegando l'unità disco rigido (HDD) a un particolare dispositivo. Se l'HDD viene rimosso da quel particolare dispositivo e posto in un altro, il processo di decrittografia non riesce. Il ripristino è possibile con la password di decrittografia o il token.
 Anche se questo ha il vantaggio che il disco non può essere rimosso dal dispositivo, potrebbe generare un singolo punto di errore nella crittografia. Ad esempio, se qualcosa accade al TPM o alla scheda madre, un utente non sarebbe in grado di accedere ai dati collegando l'unità disco a un altro computer, a meno che tale utente non disponga di una chiave di ripristino separata.
 
-## Full disk encryption
+## 2. Full disk encryption
 
-#### Benefici
+#### 2.1 Benefici
 
 La Full Disk Encryption ha diversi vantaggi rispetto alla File Encryption regolare, o celle crittografate. Di seguito sono elencati alcuni vantaggi della crittografia del disco:
 
@@ -93,11 +99,11 @@ La Full Disk Encryption ha diversi vantaggi rispetto alla File Encryption regola
 
 - La distruzione immediata dei dati, come la distruzione delle chiavi crittografiche (crypto-shredding), rende inutili i dati contenuti. Tuttavia, se la sicurezza verso i futuri attacchi è una preoccupazione, si consiglia l'eliminazione o la distruzione fisica.
 
-#### Il problema della chiave al boot
+#### 2.2 Il problema della chiave al boot
 
 Un problema da affrontare nella Full Disk Encryption è che i blocchi in cui è memorizzato il sistema operativo devono essere decifrati prima che il sistema operativo possa avviarsi, il che significa che la chiave deve essere disponibile prima che esista un'interfaccia utente per richiedere una password. La maggior parte delle soluzioni di crittografia completa utilizza l'autenticazione Pre-Boot caricando un sistema operativo piccolo e altamente sicuro che è strettamente bloccato e disegnato rispetto alle variabili di sistema per verificare l'integrità del kernel Pre-Boot. Alcune implementazioni possono utilizzare hardware come un modulo di piattaforma attendibile per garantire l'integrità dell'ambiente di avvio e pertanto frustrare gli attacchi che mirano al loader di avvio sostituendolo con una versione modificata. Ciò garantisce che l'autenticazione può avvenire in un ambiente controllato senza la possibilità che un bootkit venga utilizzato per sovvertire la decrittografia pre-avvio.
 
-## Vari strumenti di Disk Encryption
+## 3. Vari strumenti di Disk Encryption
 
 Ci sono diversi strumenti disponibili sul mercato che consentono la crittografia del disco. Tuttavia, variano notevolmente nelle funzioni e nella sicurezza. Sono suddivisi in tre categorie principali:
 
@@ -107,7 +113,7 @@ Ci sono diversi strumenti disponibili sul mercato che consentono la crittografia
 
 La Full Disk Encryption Hardware all'interno del dispositivo di memorizzazione è chiamata unità autocripting e non ha alcun impatto sulle prestazioni. Inoltre, la chiave di crittografia dei media non lascia mai il dispositivo stesso e pertanto non è disponibile per alcun virus nel sistema operativo.
 
-#### Disk Encryption Hardware
+#### 3.1 Disk Encryption Hardware
 
 Rispetto alle restrizioni di accesso comunemente attuate da un sistema operativo, questa tecnica protegge i dati anche quando il sistema operativo non è attivo, ad esempio, se i dati vengono letti direttamente dall'hardware.
 L'hardware progettato per uno scopo particolare può spesso ottenere prestazioni migliori rispetto alle implementazioni del software e Disk Encryption Hardware può essere resa più trasparente del software rispetto alla Disk Encryption Software. Non appena la chiave è stata inizializzata, l'hardware dovrebbe in linea di principio essere completamente trasparente per il sistema operativo e quindi lavorare con qualsiasi sistema operativo.
@@ -155,7 +161,7 @@ SVANTAGGI
 
     Il firmware dell'unità può essere compromesso (backdoor). Tuttavia, se i dati vengono crittografati dal sistema operativo (ad esempio, dm-crypt), la chiave di crittografia non è conosciuta per l'unità compromessa, evitando così completamente questo vettore d'attacco.
 
-#### Disk Encryption Software
+#### 3.2 Disk Encryption Software
 
 La Disk Encryption Software funziona in genere a livello tra tutte le applicazioni e la maggior parte dei programmi di sistema e dei driver "in modo trasparente" (da un punto di vista dell'utente) che crittografa i dati dopo che vengono prodotti da un programma ma prima che siano fisicamente scritti sul disco. Al contrario, decrittografa i dati immediatamente dopo la lettura, ma prima di essere presentati ad un programma. Fatto bene, i programmi non sono consapevoli di queste operazioni crittografiche.
 
@@ -181,13 +187,13 @@ BACKUP
 I volumi crittografati contengono dati "header" (o "CDB"), che possono essere eseguiti con il backup. La sovrascrittura di questi dati distruggerà il volume, quindi la possibilità di eseguire il backup è utile.
 Ripristinare la copia di backup di questi dati può ripristinare la password del volume a quello che era quando è stato eseguito il backup.
 
-## Problemi di sicurezza
+## 4. Problemi di sicurezza
 
 La maggior parte degli schemi di Full Disk Encryption sono vulnerabili ad un Cold Boot Attack, per cui le chiavi di crittografia possono essere rubate dall'avvio a freddo di una macchina già in esecuzione di un sistema operativo, quindi scaricando il contenuto della memoria prima che i dati scompaiano. L'attacco si basa sulla proprietà di remanenza dei dati della memoria del computer, per cui i bit di dati possono richiedere fino a diversi minuti per degradarsi.
 La Full Disk Encryption è vulnerabile anche al furto quando il sistema si trova in sospensione. Esso infatti al Wake-Up non richiede nuovamente la sequenza di avvio del BIOS. L'ibernazione, al contrario, viene eseguita tramite una sequenza di avvio del BIOS e è sicura.
 Tutti i sistemi di crittografia basati su software sono vulnerabili a vari attacchi di canali laterali come la cryptanalysis acustica e i keylogger hardware. Al contrario, le unità di auto-crittografia non sono vulnerabili a questi attacchi poiché la chiave di crittografia hardware non lascia mai il controller del disco.
 
-## Metodi
+## 5. Metodi
 
 Tutti i metodi di cifratura operano in modo tale che anche se il disco contiene effettivamente dati crittografati, il sistema operativo e le applicazioni vedono essi come i corrispondenti dati normali leggibili finché il contenitore crittografico (ossia la parte logica del disco che contiene i dati crittografati) è "sbloccato" e montato.
 Per far accadere questo, alcune informazioni segrete (di solito sono keyfile e/o password) devono essere fornite dall'utente, dal quale la reale chiave di cifratura può essere derivata (e immagazzinata nel portachiavi del kernel per la durata della sessione).
@@ -203,11 +209,11 @@ Per far accadere questo, alcune informazioni segrete (di solito sono keyfile e/o
   I metodi di cifratura dei dispositivi a blocchi, d'altronde, operano sotto lo strato del filesystem e assicurano che tutto sia scritto in un dispositivo a blocchi (ossia un disco intero, o una partizione, o un file che si comporta come un dispositivo virtuale loop-back) cifrato. Ciò significa che mentre il dispositivo a blocchi è spento, il suo intero contenuto assomiglia a una grande macchia di dati casuali, senza la possibilità di determinare che tipo di filesystem sia e quali dati contenga. Si può accedere ai dati, montando il contenitore protetto (in questo caso un dispositivo a blocchi) in una posizione arbitraria in un modo speciale.
   Soluzioni disponibili in questa categoria sono loop-AES, dm-crypt + LUKS e TrueCrypt.
 
-#### Comparazione dei software di Disk Encryption
+## 6. Comparazione dei software di Disk Encryption
 
 I vari tool di cifratura software presentano varie differenze tra di loro, molte delle quali sono caratterizzanti della categoria di cui fanno parte.
 
-##### Cifratura stacked filesystem
+#### 6.1 Cifratura stacked filesystem
 
 Questi tipi di tool cifrano file. Il contenitore per i dati cifrati può essere una cartella in un filesystem esistente. Aggiungono uno strato aggiuntivo nel filesystem esistente, per cifrare/decifrare automaticamente i file quando sono scritti/letti. Possono essere usati senza pre-allocare una quantità fissa di spazio per il contenitore di dati cifrati e per proteggere filesystem esistenti senza l'accesso ai dispositivi a blocchi, es. filesystem NFS e Samba, cloud, etc. Inoltre permettono backup dei file cifrati offline.
 
@@ -221,7 +227,7 @@ I principali tool di questa categoria sono:
 
   Il più facile da usare; supporta le cifrature AES e Twofish. Permette il montaggio automatico dei filesystem al login e lo smontaggio automatico dei filesystem in caso di inattività. Inoltre utenti non-root posso creare/eliminare contenitori per dati cifrati.
 
-##### Cifratura Block device
+#### 6.2 Cifratura Block device
 
 Questi tipi di tool riescono a criptare interi dispositivi a blocchi. Il contenitore per i dati cifrati può essere un disco o una partizione / un file che si comporta come una partizione virtuale. Operano sotto lo strato del filesystem, non importa se il contenuto del dispositivo a blocchi cifrato è un filesystem, un partition table, un LVM setup, o altro. Inoltre questi tools cifrano anche i metadati e possono essere utilizzati per criptare interi dischi rigidi e addirittura le partizioni di swap.
 I principali tool di questa categoria sono:
@@ -237,12 +243,12 @@ I principali tool di questa categoria sono:
 - TrueCrypt
 
   Molto portabile e e ben mantenuto. Molto simile a dm-crypt ma punta molto sulle performance, fornendo supporto per il multithreading e per la cifratura con accelerazione hardware.
-  
+
 <div align="center">
 <img src="Diagram.png">
 </div>
 
-## Cosa scegliere?
+## 7. Cosa scegliere?
 
 Scegliere quale setup di Disk Encryption è appropriato per i propri scopi varia in base ai vari obiettivi che si vogliono raggiungere. Per arrivare ad un setup che riesca a soddisfare le nostre esigenze bisogna rispondere a determinate domande:
 
@@ -273,7 +279,7 @@ Scegliere quale setup di Disk Encryption è appropriato per i propri scopi varia
   - più chiavi indipendenti e revocabili per la stessa parte di disco
   - parti del disco cifrate separate per utenti diversi
 
-## Come funziona la Disk Encryption
+## 8. Come funziona la Disk Encryption
 
 Per i fini della crittografia del disco, ogni dispositivo a blocchi (o file nel caso di crittografia di stacked filesystem) è diviso in settori di uguale lunghezza, per esempio 512 byte (4096 bit). La cifratura/decifratura avviene per ogni singolo settore, quindi il settore "n" del dispositivo a blocchi/file immagazzinerà la versione cifrata del settore "n" dei dati originali.
 Ogni volta che il sistema operativo o l'applicazione richiede un certo frammento di dato dal dispositivo a blocchi/file, l'intero settore/i che contiene i dati sarà letto dal disco, decifrato al volo, e temporaneamente immagazzinato nella memoria:
@@ -294,7 +300,7 @@ Quando si decodifica, la procedura viene invertita in modo analogo.
 Una cosa da notare è la generazione del vettore di inizializzazione univoco per ogni settore. La scelta più semplice è quella di calcolarlo in modo prevedibile da un valore prontamente disponibile, come il numero del settore. Tuttavia, questo potrebbe consentire a un utente malintenzionato l'accesso ripetuto al sistema per eseguire un cosiddetto attacco di watermarking. Per evitare ciò, è possibile utilizzare un metodo chiamato "Encrypted salt-sector initialization vector (ESSIV)" per generare i vettori di inizializzazione in modo tale da renderli completamente casuali ad un potenziale aggressore.
 Esistono anche altri modi operativi più complicati disponibili per la crittografia dei dischi, che già forniscono una protezione integrata contro tali attacchi (e quindi non richiedono ESSIV). Alcuni possono inoltre garantire inoltre l'autenticità dei dati crittografati (cioè confermare che non è stato modificato o corrotto da qualcuno che non abbia accesso alla chiave).
 
-## Demo
+## 9. Demo
 
 La demo è stata realizzata utilizzando i seguenti strumenti:
 
@@ -315,9 +321,9 @@ La demo comprende i due tools rappresentanti delle due categorie prima descritte
 
   Questo tool è stato utilizzato per cifrare un disco su Windows e mostrare la feature di Hidden Volumes che ci offre questo tool
 
-## Appendice A: Disk Encryption nei database
+## 10. Appendice A: Disk Encryption nei database
 
-## Fonti
+## 11. Fonti
 
 #### Wikipedia
 
